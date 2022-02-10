@@ -1,7 +1,45 @@
-var http = require('http');
+//var http = require('http');
 var data = require ('./words.json');
-for (let i = 0; i < 20; i++) {
-  console.log(data.words[i]);
+const readline = require('readline');
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+main();
+function main(){
+  rl.question("known position regex:", (regex)=> {
+    const rep = new RegExp(regex);
+    let result = [];
+    data.words.forEach(element => {
+      if(rep.test(element)){
+        result.push(element);
+      }
+    });
+  rl.question("Pending letters(if any):", (letters)=>{
+      for (let i = 0; i < letters.length; i++) {
+        const element = letters.charAt(i);
+        result = result.filter(s => s.includes(element));
+      }
+      rl.question("Absent letters(if any):",(letters) => {
+        for (let i = 0; i < letters.length; i++) {
+          const element = letters.charAt(i);
+          result = result.filter(s => !s.includes(element));
+        }
+        rl.close();
+        present(result);
+        main();
+      });
+      
+    });
+    
+  });
+}
+
+
+function present(x){
+  x.forEach(element => {
+    console.log(element)
+  });
 }
 
 // http.createServer(function (req, res) {

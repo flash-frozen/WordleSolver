@@ -1,0 +1,19 @@
+{
+  "name": "wordlesolver",
+  "version": "1.0.0",
+  "description": "Wordle Solver",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "node index"
+  },
+  "keywords": [
+    "wordle",
+    "algorithm"
+  ],
+  "author": "Emil Morris",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.25.0"
+  }
+}

@@ -12,8 +12,5 @@
     "algorithm"
   ],
   "author": "Emil Morris",
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^0.25.0"
-  }
+  "license": "ISC"
 }

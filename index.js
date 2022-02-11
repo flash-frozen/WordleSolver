@@ -6,8 +6,8 @@ const cli = readline.createInterface({
   output: process.stdout
 });
 async function main(){
-  let regex = await cli.question("known position regex:");
-  const rep = new RegExp(regex);
+  //let regex = await cli.question("known position regex:");
+  const rep = await GenerateRegex();
   let result = [];
   data.words.forEach(element => {
     if(rep.test(element)){
@@ -29,6 +29,21 @@ async function main(){
   main();
 }
 main();
+async function GenerateRegex(){
+  let reg = '';
+  for (let i = 0; i < 5; i++) {
+    reg += await RegexBlock(i);
+    
+  }
+  return new RegExp(reg);
+}
+async function RegexBlock(index) {
+    const charInfo = await cli.question(`Character ${index + 1} info? `)
+    if (charInfo === '') return '.';
+    const [command, letters] = charInfo.split(' ')
+    if (command === 'not') { return '[^'+letters+']' }
+    if (command === 'is') { return letters.split('')[0] }
+}
 
 function present(x){
   x.forEach(element => {

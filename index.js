@@ -20,13 +20,19 @@ async function main(){
     const element = letters.charAt(i);
     result = result.filter(s => s.includes(element));
   }
-  let absent = await cli.question("Absent letters(if any):");
-  for (let i = 0; i < absent.length; i++) {
-    const element = absent.charAt(i);
-    result = result.filter(s => !s.includes(element));
-  }
+  // let absent = await cli.question("Absent letters(if any):");
+  // for (let i = 0; i < absent.length; i++) {
+  //   const element = absent.charAt(i);
+  //   result = result.filter(s => !s.includes(element));
+  // }
   present(result);
-  main();
+  if (result.length > 1){
+    main();
+  }
+  else{
+    console.log('Solved!');
+    cli.close();
+  }
 }
 main();
 async function GenerateRegex(){
@@ -42,7 +48,8 @@ async function RegexBlock(index) {
     if (charInfo === '') return '.';
     const [command, letters] = charInfo.split(' ')
     if (command === 'not') { return '[^'+letters+']' }
-    if (command === 'is') { return letters.split('')[0] }
+    else if (command === 'is') { return letters.split('')[0] }
+    else return '.';
 }
 
 function present(x){
